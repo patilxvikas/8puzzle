@@ -5,7 +5,7 @@ body{
   font-family: 'Courier Prime', monospace;
   display: flex;
   justify-content: center;
-  background-color: #c01616;
+  background-color: #252525;
 }
 #game{
   margin-top: 40px;
