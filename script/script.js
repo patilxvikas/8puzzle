@@ -257,7 +257,7 @@ function solution(path,i,len,tile) {
         if (i < len) { 
             solution(path,i,len,tile);          
         }                               
-    }, 200);
+    }, 100);
 }
 //------------------------------add player action feature----------------------------------
 function takeAction(ind,tile){
@@ -277,7 +277,7 @@ function takeAction(ind,tile){
 window.addEventListener('load', function () {
     var tile=document.getElementsByClassName("puzzle");     //get all tiles(on screen)
     update(tile,endState);                                 //update tiles(on screen)
-    document.getElementById("shuffle").addEventListener("click",function(){
+    document.getElementById("shuffle").addEventListener("click",async function(){
         var eSt=createPuzzle(endState);                     //reset to endState
         shuffle(eSt,0);                                     //than shuffle upto 30 steps
         update(tile,eSt);                                 //update tiles(on screen)
@@ -290,7 +290,7 @@ window.addEventListener('load', function () {
     }
     document.getElementById("solve").addEventListener("click",async function(){
         var states=check(tile);                             //read state from tiles
-        let path=solve(states,tile);
+        let path=await solve(states,tile);
         let realPath=[];
         var i=path.length-1;
         var j=path.length-2;
