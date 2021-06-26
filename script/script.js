@@ -1,5 +1,4 @@
-
-//--------------------------variables----------------------------------
+//Variables-----------------------------------------------------------------------
 const r=[1,0,-1,0];                             //row action
 const c=[0,1,0,-1];                             //column action
 const endState=[["1","2","3"],["4","5","6"],["7","8","0"]];
@@ -67,9 +66,19 @@ function update(tile,states){
         for(let j=0;j<3;j++){
             tile[ind].innerHTML=states[i][j];
             if(tile[ind].innerHTML!=string[ind]){
+                if(tile[ind].innerHTML=="0"){
+                    tile[ind].style.color="#ffa3a3";
+                }else{
+                    tile[ind].style.color="#252525";
+                }
                 tile[ind].style.backgroundColor= "#ffa3a3";
                 tile[ind].style.filter="opacity(100%)";
             }else{
+                if(tile[ind].innerHTML=="0"){
+                    tile[ind].style.color="#9fffba";
+                }else{
+                    tile[ind].style.color="#252525";
+                }
                 tile[ind].style.backgroundColor= "#9fffba";
                 tile[ind].style.filter="opacity(100%)";
             }
@@ -257,7 +266,7 @@ function solution(path,i,len,tile) {
         if (i < len) { 
             solution(path,i,len,tile);          
         }                               
-    }, 100);
+    }, 150);
 }
 //------------------------------add player action feature----------------------------------
 function takeAction(ind,tile){
@@ -273,24 +282,31 @@ function takeAction(ind,tile){
         }
     }
 }
+//----------------------------------------------------------------------------------------
+
 //************************************main function*************************************
 window.addEventListener('load', function () {
-    var tile=document.getElementsByClassName("puzzle");     //get all tiles(on screen)
-    update(tile,endState);                                 //update tiles(on screen)
-    document.getElementById("shuffle").addEventListener("click",async function(){
+    var tile=document.getElementsByClassName("puzzle");     //get all(on screen) tiles
+    update(tile,endState); 
+    function shuffleButton(){
+        document.getElementById("shuffle").removeEventListener("click",shuffleButton);
         var eSt=createPuzzle(endState);                     //reset to endState
         shuffle(eSt,0);                                     //than shuffle upto 30 steps
-        update(tile,eSt);                                 //update tiles(on screen)
-    });
+        update(tile,eSt); 
+        document.getElementById("shuffle").addEventListener("click",shuffleButton);
+    }                                
+    document.getElementById("shuffle").addEventListener("click",shuffleButton);
     for(let i=0;i<9;i++){
         tile[i].addEventListener("click",function(){
             // console.log(i);
             takeAction(index[i],tile);
         });
     }
-    document.getElementById("solve").addEventListener("click",async function(){
+    function solveButton(){
+        document.getElementById("solve").removeEventListener("click",solveButton);
+        document.getElementById("shuffle").removeEventListener("click",shuffleButton);
         var states=check(tile);                             //read state from tiles
-        let path=await solve(states,tile);
+        let path=solve(states,tile);
         let realPath=[];
         var i=path.length-1;
         var j=path.length-2;
@@ -307,6 +323,9 @@ window.addEventListener('load', function () {
         path=realPath.reverse(); 
         path[path.length-1]=endSt;
         console.log("solution->",path);                   
-        solution(path,0,path.length,tile);              
-    });
+        solution(path,0,path.length,tile);   
+        document.getElementById("solve").addEventListener("click",solveButton);
+        document.getElementById("shuffle").addEventListener("click",shuffleButton);
+    }
+    document.getElementById("solve").addEventListener("click",solveButton);
 });
