@@ -5,7 +5,16 @@ const endState=[["1","2","3"],["4","5","6"],["7","8","0"]];
 const index=[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]];  
 const endSt=[["1","2","3"],["4","5","6"],["7","8","0"]]; //endstate
 const string=["1","2","3","4","5","6","7","8","0"];
-
+const image=["url('./img/1.jpg')",
+"url('./img/9.jpg')",
+"url('./img/8.jpg')",
+"url('./img/7.jpg')",
+"url('./img/6.jpg')",
+"url('./img/5.jpg')",
+"url('./img/4.jpg')",
+"url('./img/3.jpg')",
+"url('./img/2.jpg')",
+]
 //*************************************Create new State*****************************
 function createPuzzle(puzzle){
     var y=new Array(puzzle);
@@ -65,25 +74,28 @@ function update(tile,states){
     for(let i=0;i<3;i++){
         for(let j=0;j<3;j++){
             tile[ind].innerHTML=states[i][j];
+            tile[ind].style.backgroundImage=image[states[i][j]];
+            tile[ind].style.backgroundSize="127px 127px";
             if(tile[ind].innerHTML!=string[ind]){
-                if(tile[ind].innerHTML=="0"){
-                    tile[ind].style.color="#ffa3a3";
-                }else{
-                    tile[ind].style.color="#252525";
-                }
-                tile[ind].style.backgroundColor= "#ffa3a3";
+
+                // if(tile[ind].innerHTML=="0"){
+                //     tile[ind].style.color="#ffa3a3";
+                // }else{
+                //     tile[ind].style.color="#252525";
+                // }
+                // tile[ind].style.backgroundColor= "#ffa3a3";
                 tile[ind].style.filter="opacity(100%)";
             }else{
                 if(tile[ind].innerHTML=="0"){
-                    tile[ind].style.color="#9fffba";
+                    // tile[ind].style.color="#9fffba";
                 }else{
-                    tile[ind].style.color="#252525";
+                    // tile[ind].style.color="#252525";
                 }
-                tile[ind].style.backgroundColor= "#9fffba";
+                // tile[ind].style.backgroundColor= "#9fffba";
                 tile[ind].style.filter="opacity(100%)";
             }
             if(tile[ind].innerHTML=="0"){
-                tile[ind].style.filter="opacity(60%)";
+                tile[ind].style.filter="opacity(30%)";
             }
             ind++;
         }
