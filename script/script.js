@@ -95,7 +95,7 @@ function update(tile,states){
                 tile[ind].style.filter="opacity(100%)";
             }
             if(tile[ind].innerHTML=="0"){
-                tile[ind].style.filter="opacity(30%)";
+                tile[ind].style.filter="opacity(35%)";
             }
             ind++;
         }

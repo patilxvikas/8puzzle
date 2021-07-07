@@ -61,6 +61,7 @@ body{
   text-align: center;
   color: #25252500;
   /* background-color: #9FFFBA; */
+  opacity: 90%;
   cursor: pointer;
 }
 #buttons{
