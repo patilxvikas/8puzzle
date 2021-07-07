@@ -29,7 +29,7 @@ function createPuzzle(puzzle){
 }
 //***********************************shuffle the State*********************************
 function shuffle(state,cnt){
-    if(cnt>30)return;                                       //shuffle upto 30 steps
+    if(cnt>20)return;                                       //shuffle upto 30 steps
     var act=action(zero(state));                                  //get all the possible actions
     var noOfAction=act.length;                              //no, of possible actions
     var takeAction=Math.floor(Math.random() * noOfAction);  //take random action
